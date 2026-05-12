@@ -1,26 +1,51 @@
-print("=== Sistema de Autenticação de Carregador EV ===\n")
+temperaturas = [
+    [28, 31, 34, 33],
+    [25, 27, 29, 28],
+    [32, 35, 36, 34],
+    [24, 26, 25, 27]
+]
 
-carro = input("Digite o modelo do seu carro: ")
-bateria = int(input("Nível atual da bateria (%): "))
+sala_mais_critica = 0
+max_criticos = 0
 
-if bateria >= 100:
-    print("Bateria já está cheia! Carregamento não necessário.")
-else:
-    conexao = input("O veículo está conectado ao carregador? (S/N): ").upper()
+num_sala = 1
+for sala in temperaturas:
+    soma = 0
+    criticos = 0
 
-    if conexao == "S":
-        print(f"\n✔ Autenticação concluída!")
-        print(f"  Carro: {carro}")
-        print(f"  Bateria atual: {bateria}%")
-        print(f"  Carregamento iniciado...\n")
+    for temp in sala:
+        soma += temp
+        if temp >= 33:
+            criticos += 1
 
-        continuar = input("Deseja interromper o carregamento? (S/N): ").upper()
-        if continuar == "S":
-            print("Carregamento interrompido. Desconecte o cabo com segurança.")
-        else:
-            print(f"Carregando... Notificaremos quando atingir 100%.")
+    media = soma / len(temperaturas)
+    print(f'Sala: {num_sala}')
+    print(media)
+    print(criticos)
 
-    elif conexao == "N":
-        print("Conexão não detectada. Verifique o cabo e tente novamente.")
-    else:
-        print("Entrada inválida. Digite S para Sim ou N para Não.")
+    if criticos > max_criticos:
+        max_criticos = criticos
+        sala_mais_critica = num_sala
+
+    num_sala += 1
+    print()
+
+print(sala_mais_critica)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
